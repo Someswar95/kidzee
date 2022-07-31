@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Kidzee</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Free HTML Templates" name="keywords">
+<meta content="Free HTML Templates" name="description">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/admin/dashboard}">Kidzee</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link" th:href="@{/admin/student/list}">Student</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/admin/contact/list}">Contact Manager</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/admin/newsletter/list}">Newsletter</a></li>
+					</ul>
+					<form class="d-flex" role="search">
+						<input class="form-control me-2" type="search"
+							placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container-fluid my-2">
+
+        <h2 class="text-danger">Student List</h2>
+
+        <a th:href="@{/admin/student/form}" class="btn btn-primary btn-sm mb-3">Add Student</a>
+
+        <table border="1" class="table table-success table-striped-columns">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Alternate Phone</th>
+                    <th scope="col">Division</th>
+                    <th scope="col">DOB</th>
+                    <th scope="col">Father's Name</th>
+                    <th scope="col">Mother's Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${listStudents}">
+                    <td th:text="${student.id}"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.email}"></td>
+                    <td th:text="${student.phone}"></td>
+                    <td th:text="${student.aphone}"></td>
+                    <td th:text="${student.division}"></td>
+                    <td th:text="${student.dob}"></td>
+                    <td th:text="${student.fname}"></td>
+                    <td th:text="${student.mname}"></td>
+                    <td> <a th:href="@{/admin/student/update/{id}(id=${student.id})}" class="btn btn-primary">Update</a>
+                    	<a th:href="@{/admin/student/delete/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+</html>

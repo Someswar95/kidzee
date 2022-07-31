@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title th:text="${brand}"></title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+            <a th:href="@{/}" class="navbar-brand font-weight-bold text-secondary" style="font-size: 40px;">
+                <!-- <i class="flaticon-043-teddy-bear"></i> -->
+                <!-- <span class="text-primary">HighImpact School</span> -->
+                <span class="text-primary" th:text="${brand}"></span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold mx-auto py-0">
+                    <a th:href="@{/}" class="nav-item nav-link active">Home</a>
+                    <a th:href="@{/about}" class="nav-item nav-link">About</a>
+                    <a th:href="@{/classes}" class="nav-item nav-link">Classes</a>
+                    <a th:href="@{/teachers}" class="nav-item nav-link">Teachers</a>
+                    <a th:href="@{/gallery}" class="nav-item nav-link">Gallery</a>
+                    <a th:href="@{/contact}" class="nav-item nav-link">Contact</a>
+                </div>
+                <a th:href="@{/admission}" class="btn btn-primary px-4">Admission</a>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Admission Start -->
+
+    <div class="container-fluid pt-5 pb-3">
+        <div class="container">
+            <div class="text-center pb-2">
+                <p class="section-title px-5"><span class="px-2">Admission</span></p>
+                <h1 class="mb-4">Admission open Upto V from LKG </h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 mb-5">
+                    <div class="contact-form">
+                        <div id="success"></div>
+                        <form th:action="@{/admission/submit}" th:object="${student}" method="post" name="sentMessage" id="contactForm" novalidate="novalidate">
+                            <div class="control-group">
+                                <label for="name">Name</label>
+                                <input type="text" th:field="*{name}" class="form-control" id="name" required="required" data-validation-required-message="Please enter your name" placeholder="Your Name"/>
+                                <!-----<p class="help-block text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>--->
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <label for="email">Email</label>
+                                <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" >
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <label for="mobile">Phone</label>
+                                <input type="tel" th:field="*{phone}"  class="form-control" id="number" placeholder="123-456-7890"  required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" data-validation-required-message="Please enter your number" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <label for="mobile">Alternative Phone</label>
+                                <input type="text" th:field="*{aphone}" class="form-control" id="anumber" placeholder="123-456-7890" required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" data-validation-required-message="Please enter your alternative number" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <label for="class">Class</label>
+                                <select class="form-select form-control" th:field="*{division}" id="class" required="required" aria-label="Default select example">
+                                    <option th:each="list : ${classList}" th:value="${list}" th:text="${list}"></option>
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <label for="dob">DOB</label>
+                                <input type="date" th:field="*{dob}" class="form-control" id="dob" required="required" data-validation-required-message="Please enter your DOB" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <label for="f-name">Father's Name</label>
+                                <input type="text" th:field="*{fname}" class="form-control" id="fname" placeholder="Your Father's Name" required="required" data-validation-required-message="Please enter your father's name" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <label for="m-name">Mather's Name</label>
+                                <input type="text" th:field="*{mname}" class="form-control" id="mname" placeholder="Your Mather's Name" required="required" data-validation-required-message="Please enter your mother's name" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+    <!-- Admission End -->
+
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>
