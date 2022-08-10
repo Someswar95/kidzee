@@ -30,7 +30,7 @@ public class KidzeeApplication implements CommandLineRunner{
 		
 		Admin admin = new Admin();
 		admin.setAdminId(1);
-		admin.setUsername("admin");
+		admin.setUsername("admina");
 		admin.setPassword("admin");
 		
 		this.adminRepo.save(admin);
